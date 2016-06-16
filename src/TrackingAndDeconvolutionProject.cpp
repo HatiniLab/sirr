@@ -3,8 +3,8 @@
 #include <itkImageFileReader.h>
 #include <itkSCIFIOImageIO.h>
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetOriginalImage(int frame){
-	typename ImageType::Pointer result{};
+ TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetOriginalImage(int frame){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << m_OriginalName<<"_T" << m_FirstFrame+frame <<".mha";
@@ -14,7 +14,7 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetObservedImage(int frame,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetObservedImage(int frame,int level,const  TrackingAndDeconvolutionProject::ImageType::Pointer & image){
     std::stringstream buffer("");
     buffer << "observed_L" << level <<"_T" << m_FirstFrame+frame <<".mha";
     std::string fileName = buffer.str();
@@ -23,9 +23,9 @@ void TrackingAndDeconvolutionProject::SetObservedImage(int frame,int level,const
 
 
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetObservedImage(int frame,int level){
+ TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetObservedImage(int frame,int level){
 
-	typename ImageType::Pointer result{};
+	 ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "observed_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
@@ -35,15 +35,15 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetPSF(int frame,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetPSF(int frame,int level,const  TrackingAndDeconvolutionProject::ImageType::Pointer & image){
     std::stringstream buffer("");
     buffer << "psf_L" << level <<"_T" << m_FirstFrame+frame <<".mha";
     std::string fileName = buffer.str();
     this->WriteFrame<ImageType>(image,fileName);
 }
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetTemplatePSF(){
-	typename ImageType::Pointer result{};
+ TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetTemplatePSF(){
+	 ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "psf.ome.tif";
@@ -54,9 +54,9 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
 }
 
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetPSF(int frame,int level){
+ TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetPSF(int frame,int level){
 
-	typename ImageType::Pointer result{};
+	 ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "psf_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
@@ -69,15 +69,15 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
 
 
 
-void TrackingAndDeconvolutionProject::SetEstimatedImage(int frame,int level, const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetEstimatedImage(int frame,int level, const  TrackingAndDeconvolutionProject::ImageType::Pointer & image){
     std::stringstream buffer("");
     buffer << "estimate_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
     std::string fileName = buffer.str();
     this->WriteFrame<ImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetEstimatedImage(int frame,int level){
+ TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetEstimatedImage(int frame,int level){
 
-	typename ImageType::Pointer result{};
+	 ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "estimate_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
@@ -88,14 +88,14 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
 
 }
 
-void TrackingAndDeconvolutionProject::SetEstimatedFrequencyImage( int frame,int level,const typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetEstimatedFrequencyImage( int frame,int level,const TrackingAndDeconvolutionProject::ComplexImageType::Pointer & image){
 	std::stringstream buffer("");
 	buffer << "estimateFrequency_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ComplexImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndDeconvolutionProject::GetEstimatedFrequencyImage(int frame,int level){
-	typename ComplexImageType::Pointer result{};
+ TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndDeconvolutionProject::GetEstimatedFrequencyImage(int frame,int level){
+	ComplexImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "estimateFrequency_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
@@ -105,14 +105,14 @@ typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndD
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetTransferImage(int frame,int level,const typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetTransferImage(int frame,int level,const TrackingAndDeconvolutionProject::ComplexImageType::Pointer & image){
 	std::stringstream buffer("");
 	buffer << "transfer_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ComplexImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndDeconvolutionProject::GetTransferImage(int frame,int level ){
-	typename ComplexImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndDeconvolutionProject::GetTransferImage(int frame,int level ){
+	ComplexImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "transfer_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
@@ -123,14 +123,14 @@ typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndD
 }
 
 
-void TrackingAndDeconvolutionProject::SetPoissonShrinkedImage(int frame,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetPoissonShrinkedImage(int frame,int level,const TrackingAndDeconvolutionProject::ImageType::Pointer & image){
 	std::stringstream buffer("");
 	buffer << "poissonShrinked_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetPoissonShrinkedImage(int frame,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetPoissonShrinkedImage(int frame,int level){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "poissonShrinked_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
@@ -140,8 +140,8 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetWarpedPoissonShrinkedImage(int frame0,int frame1,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetWarpedPoissonShrinkedImage(int frame0,int frame1,int level){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "warpedPoissonShrinked_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
@@ -152,7 +152,7 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetWarpedPoissonShrinkedImage(int frame0,int frame1,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image ){
+void TrackingAndDeconvolutionProject::SetWarpedPoissonShrinkedImage(int frame0,int frame1,int level,const TrackingAndDeconvolutionProject::ImageType::Pointer & image ){
 	std::stringstream buffer("");
     buffer << "warpedPoissonShrinked_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
 	std::string fileName = buffer.str();
@@ -161,14 +161,14 @@ void TrackingAndDeconvolutionProject::SetWarpedPoissonShrinkedImage(int frame0,i
 
 
 
-void TrackingAndDeconvolutionProject::SetConjugatedPoisson(int frame,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetConjugatedPoisson(int frame,int level,const TrackingAndDeconvolutionProject::ImageType::Pointer & image){
 	std::stringstream buffer("");
 	buffer << "conjugatedPoisson_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetConjugatedPoisson(int frame,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetConjugatedPoisson(int frame,int level){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "conjugatedPoisson_L"<< level<<"_T" << m_FirstFrame+frame <<".mha";
@@ -177,8 +177,8 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     this->ReadFrame<ImageType>(result,fileName);
     return result;
 }
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetConjugatedWarpedPoisson(int frame0,int frame1,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetConjugatedWarpedPoisson(int frame0,int frame1,int level){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "conjugatedWarpedPoisson_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
@@ -189,22 +189,22 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetConjugatedWarpedPoisson(int frame0,int frame1,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image ){
+void TrackingAndDeconvolutionProject::SetConjugatedWarpedPoisson(int frame0,int frame1,int level,const  TrackingAndDeconvolutionProject::ImageType::Pointer & image ){
 	std::stringstream buffer("");
     buffer << "conjugatedWarpedPoisson_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
 
-void TrackingAndDeconvolutionProject::SetMovingConjugated(int frame0,int frame1,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetMovingConjugated(int frame0,int frame1,int level,const  TrackingAndDeconvolutionProject::ImageType::Pointer & image){
 	std::stringstream buffer("");
 	buffer << "conjugatedMoving_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetMovingConjugated(int frame0,int frame1,int level){
-	typename ImageType::Pointer result{};
+ TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetMovingConjugated(int frame0,int frame1,int level){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "conjugatedMoving_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
@@ -214,15 +214,15 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetMovingShrinked(int frame0,int frame1,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetMovingShrinked(int frame0,int frame1,int level,const  TrackingAndDeconvolutionProject::ImageType::Pointer & image){
 	std::stringstream buffer("");
 	buffer << "shrinkedMoving_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetMovingShrinked(int frame0,int frame1,int level){
-	typename ImageType::Pointer result{};
+ TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetMovingShrinked(int frame0,int frame1,int level){
+	 ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "shrinkedMoving_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
@@ -233,15 +233,15 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
 }
 
 
-void TrackingAndDeconvolutionProject::SetHessian(int frame,int level,const typename TrackingAndDeconvolutionProject::HessianImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetHessian(int frame,int level,const TrackingAndDeconvolutionProject::HessianImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "hessian_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<HessianImageType>(image,fileName);
 }
 
-typename TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndDeconvolutionProject::GetHessian(int frame,int level){
-	typename HessianImageType::Pointer result{};
+TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndDeconvolutionProject::GetHessian(int frame,int level){
+	HessianImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "hessian_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
@@ -251,14 +251,14 @@ typename TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndD
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetShrinkedHessian(int frame,int level,const typename TrackingAndDeconvolutionProject::HessianImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetShrinkedHessian(int frame,int level,const TrackingAndDeconvolutionProject::HessianImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "shrinkedHessian_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<HessianImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndDeconvolutionProject::GetShrinkedHessian( int frame,int level){
-	typename HessianImageType::Pointer result{};
+ TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndDeconvolutionProject::GetShrinkedHessian( int frame,int level){
+	 HessianImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "shrinkedHessian_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
@@ -268,15 +268,15 @@ typename TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndD
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetConjugatedHessian(int frame,int level,const typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetConjugatedHessian(int frame,int level,const TrackingAndDeconvolutionProject::ComplexImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "conjugatedHessian_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ComplexImageType>(image,fileName);
 }
 
-typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndDeconvolutionProject::GetConjugatedHessian(int frame,int level){
-	typename ComplexImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndDeconvolutionProject::GetConjugatedHessian(int frame,int level){
+	 ComplexImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "conjugatedHessian_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
@@ -287,14 +287,14 @@ typename TrackingAndDeconvolutionProject::ComplexImageType::Pointer TrackingAndD
 }
 
 
-void TrackingAndDeconvolutionProject::SetShrinkedBounded(int frame,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetShrinkedBounded(int frame,int level,const TrackingAndDeconvolutionProject::ImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "shrinkedBounded_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetShrinkedBounded(int frame,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetShrinkedBounded(int frame,int level){
+	 ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "shrinkedBounded_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
@@ -304,14 +304,14 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetConjugatedBounded(int frame,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetConjugatedBounded(int frame,int level,const TrackingAndDeconvolutionProject::ImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "conjugatedBounded_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetConjugatedBounded(int frame,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetConjugatedBounded(int frame,int level){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "conjugatedBounded_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
@@ -321,14 +321,14 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetMotionField(int frame0, int frame1,int level,const typename TrackingAndDeconvolutionProject::FieldImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetMotionField(int frame0, int frame1,int level,const TrackingAndDeconvolutionProject::FieldImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "registration_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<FieldImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::FieldImageType::Pointer TrackingAndDeconvolutionProject::GetMotionField(int frame0,int frame1,int level){
-	typename FieldImageType::Pointer result{};
+ TrackingAndDeconvolutionProject::FieldImageType::Pointer TrackingAndDeconvolutionProject::GetMotionField(int frame0,int frame1,int level){
+	 FieldImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "registration_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
@@ -339,15 +339,15 @@ typename TrackingAndDeconvolutionProject::FieldImageType::Pointer TrackingAndDec
 }
 
 
-void TrackingAndDeconvolutionProject::SetPoissonLagrange(int frame,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image ){
+void TrackingAndDeconvolutionProject::SetPoissonLagrange(int frame,int level,const  TrackingAndDeconvolutionProject::ImageType::Pointer & image ){
 	std::stringstream buffer("");
     buffer << "poissonLagrange_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetPoissonLagrange(int frame,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetPoissonLagrange(int frame,int level){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "poissonLagrange_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
@@ -357,8 +357,8 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     return result;
 }
 
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetWarpedPoissonLagrange(int frame0,int frame1,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetWarpedPoissonLagrange(int frame0,int frame1,int level){
+	ImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "warpedPoissonLagrange_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
@@ -368,20 +368,20 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
     this->ReadFrame<ImageType>(result,fileName);
     return result;
 }
-void TrackingAndDeconvolutionProject::SetWarpedPoissonLagrange(int frame0,int frame1,int level,const typename TrackingAndDeconvolutionProject::ImageType::Pointer & image ){
+void TrackingAndDeconvolutionProject::SetWarpedPoissonLagrange(int frame0,int frame1,int level,const TrackingAndDeconvolutionProject::ImageType::Pointer & image ){
 	std::stringstream buffer("");
     buffer << "warpedPoissonLagrange_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
-void TrackingAndDeconvolutionProject::SetHessianLagrange(int frame,int level, const typename TrackingAndDeconvolutionProject::HessianImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetHessianLagrange(int frame,int level, const TrackingAndDeconvolutionProject::HessianImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "hessianLagrange_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<HessianImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndDeconvolutionProject::GetHessianLagrange(int frame,int level){
-	typename HessianImageType::Pointer result{};
+TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndDeconvolutionProject::GetHessianLagrange(int frame,int level){
+	HessianImageType::Pointer result{};
 
     std::stringstream buffer("");
     buffer << "hessianLagrange_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
@@ -391,14 +391,14 @@ typename TrackingAndDeconvolutionProject::HessianImageType::Pointer TrackingAndD
     return result;
 }
 
-void TrackingAndDeconvolutionProject::SetBoundsLagrange( int frame,int level,const typename ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetBoundsLagrange( int frame,int level,const ImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "boundsLagrange_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetBoundsLagrange(int frame,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetBoundsLagrange(int frame,int level){
+	 ImageType::Pointer result{};
 
 	std::stringstream buffer("");
 	buffer << "boundsLagrange_L"<< level<<"_T" << m_FirstFrame+frame<< ".mha";
@@ -408,14 +408,14 @@ typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvol
 	return result;
 }
 
-void TrackingAndDeconvolutionProject::SetMovingLagrange( int frame0,int frame1,int level,const typename ImageType::Pointer & image){
+void TrackingAndDeconvolutionProject::SetMovingLagrange( int frame0,int frame1,int level,const ImageType::Pointer & image){
 	std::stringstream buffer("");
     buffer << "movingLagrange_L"<< level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";
 	std::string fileName = buffer.str();
 	this->WriteFrame<ImageType>(image,fileName);
 }
-typename TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetMovingLagrange(int frame0,int frame1,int level){
-	typename ImageType::Pointer result{};
+TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetMovingLagrange(int frame0,int frame1,int level){
+	 ImageType::Pointer result{};
 
 	std::stringstream buffer("");
 	buffer << "movingLagrange_L"<<  level<<"_FT" << m_FirstFrame+frame0 <<"_MT" << m_FirstFrame+frame1 << ".mha";

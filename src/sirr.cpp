@@ -11,7 +11,7 @@
 #include <itkVariationalSymmetricDiffeomorphicRegistrationFilter.h>
 #include <itkVariationalRegistrationStopCriterion.h>
 #include <itkVariationalRegistrationLogger.h>
-#include <itkVariationalRegistrationNCCFunction.h>
+//#include <itkVariationalRegistrationNCCFunction.h>
 #include <itkVariationalRegistrationSSDFunction.h>
 #include <itkVariationalRegistrationDemonsFunction.h>
 #include <itkVariationalRegistrationElasticRegularizer.h>
@@ -958,12 +958,13 @@ public:
 			int moving { t };
 			typename InputImageType::Pointer movingFrame { };
 			movingFrame = m_Project.GetEstimatedImage(moving, m_CurrentLevel);
-
-			movingFrame->GetOrigin().Fill(0);
+			auto origin = movingFrame->GetOrigin();
+			origin.Fill(0);
+			movingFrame->SetOrigin(origin);
 
 			for (unsigned int k = 1; k <= m_W; k++) {
 
-				int fixed { t + k };
+				int fixed =int( t + k );
 
 				if (fixed < 0 || fixed >= m_Project.GetNumberOfFrames())
 					continue;
@@ -971,7 +972,9 @@ public:
 				typename InputImageType::Pointer fixedFrame { };
 				fixedFrame = m_Project.GetEstimatedImage(fixed, m_CurrentLevel);
 				//firstFrame = project.GetOriginalImage(fixed, level);
-				fixedFrame->GetOrigin().Fill(0);
+				auto origin = movingFrame->GetOrigin();
+				origin.Fill(0);
+				fixedFrame->SetOrigin(origin);
 				//ReadFile<InputImageType>(std::string(directory),std::string("estimate"),firstFrameNum.str(),"mha",firstFrame);
 				//typename InputImageType::Pointer firstFrame=ReadFile<InputImageType>(std::string(directory),std::string(prefix),firstFrameNum.str(),"ome.tif");
 
@@ -1050,7 +1053,7 @@ public:
 				int stopCriterionPolicy { 1 }; // Simple graduated is default
 				float stopCriterionSlope = 0.005;
 
-				unsigned int its[numberOfLevels] { };
+				std::vector<unsigned int> its(numberOfLevels);
 				its[numberOfLevels - 1] = numberOfIterations;
 				for (int level = numberOfLevels - 2; level >= 0; --level) {
 					its[level] = its[level + 1];
@@ -1111,7 +1114,7 @@ public:
 				mrRegFilter->SetFixedImage(fixedFrame);
 
 				mrRegFilter->SetNumberOfLevels(numberOfLevels);
-				mrRegFilter->SetNumberOfIterations(its);
+				mrRegFilter->SetNumberOfIterations(its.data());
 
 				if (!m_FirstRegistration) {
 
@@ -1742,7 +1745,11 @@ public:
 
 			ImageIFFT<InputImageType, ComplexImageType>(totalFrequency, totalPadded);
 			CropImage<InputImageType>(totalPadded, conjugatedPoisson->GetLargestPossibleRegion(), total);
-			total->GetOrigin().Fill(0);
+
+			auto origin = total->GetOrigin();
+			origin.Fill(0);
+			total->SetOrigin(origin);
+
 			total->SetSpacing(conjugatedPoisson->GetSpacing());
 			m_Project.SetEstimatedImage(t, m_CurrentLevel, total);
 
@@ -1781,9 +1788,13 @@ public:
 
 				AdjustImage<ComplexImageType>(resultFrequency, m_Offset, resultFrequency);
 				AdjustImage<ComplexImageType>(transfer, m_Offset, transfer);
-				resultFrequency->GetOrigin().Fill(0);
-				transfer->GetOrigin().Fill(0);
-				denoised->GetOrigin().Fill(0);
+				
+				auto origin = resultFrequency->GetOrigin();
+				origin.Fill(0);
+
+				resultFrequency->SetOrigin(origin);
+				transfer->SetOrigin(origin);
+				denoised->SetOrigin(origin);
 
 				resultFrequency->SetSpacing(result->GetSpacing());
 				transfer->SetSpacing(result->GetSpacing());
@@ -1801,9 +1812,12 @@ public:
 				typename InputImageType::Pointer tmp = IFFTFilter3->GetOutput();
 
 				CropImage<InputImageType>(tmp, result->GetLargestPossibleRegion(), tmp);
-				tmp->GetOrigin().Fill(0);
-				poissonLagrange->GetOrigin().Fill(0);
+
+				origin.Fill(0);
+				tmp->SetOrigin(origin);
+				poissonLagrange->SetOrigin(origin);
 				tmp->SetSpacing(result->GetSpacing());
+				
 				poissonLagrange->SetSpacing(result->GetSpacing());
 
 				typedef itk::AddImageFilter<InputImageType, InputImageType, InputImageType> AddType;
@@ -1925,7 +1939,9 @@ public:
 				typedef itk::SubtractImageFilter<HessianImageType> SubHessianType;
 
 				typename HessianFrequencyFilterType::Pointer hessianFrequency = HessianFrequencyFilterType::New();
-				resultFrequency->GetSpacing().Fill(1);
+				auto spacing = resultFrequency->GetSpacing();
+				spacing.Fill(1);
+				resultFrequency->SetSpacing(spacing);
 				hessianFrequency->SetInput1(resultFrequency);
 				hessianFrequency->SetInput2(m_HessianFilter);
 
@@ -1976,12 +1992,14 @@ public:
 
 			typename InputImageType::Pointer boundsLagrange { };
 			boundsLagrange = m_Project.GetBoundsLagrange(t, m_CurrentLevel);
-			boundsLagrange->GetOrigin().Fill(0);
+			auto origin = boundsLagrange->GetOrigin();
+			origin.Fill(0);
+			boundsLagrange->SetOrigin(origin);
 			//ReadFile<InputImageType>(std::string(directory),std::string("boundsLagrange"),frameNum.str(),"mha",boundsLagrange);
 
 			typename InputImageType::Pointer bounded { };
 			bounded = m_Project.GetShrinkedBounded(t, m_CurrentLevel);
-			bounded->GetOrigin().Fill(0);
+			bounded->SetOrigin(origin);
 			//ReadFile<InputImageType>(std::string(directory),std::string("bounded"),frameNum.str(),"mha",bounded);
 
 			typename AddType::Pointer adder = AddType::New();
@@ -2006,8 +2024,10 @@ public:
 				shrinkedMoving = m_Project.GetMovingShrinked(t, t1, m_CurrentLevel);
 				lagrangeMoving = m_Project.GetMovingLagrange(t, t1, m_CurrentLevel);
 
-				shrinkedMoving->GetOrigin().Fill(0);
-				lagrangeMoving->GetOrigin().Fill(0);
+				auto origin = shrinkedMoving->GetOrigin();
+				origin.Fill(0);
+				shrinkedMoving->SetOrigin(origin);
+				lagrangeMoving->SetOrigin(origin);
 
 				typename AddType::Pointer adder = AddType::New();
 				adder->SetInput1(result);

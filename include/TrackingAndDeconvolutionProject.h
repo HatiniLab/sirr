@@ -21,82 +21,82 @@ public:
 	typedef itk::Image<itk::SymmetricSecondRankTensor<std::complex<FloatType>,dim>, dim > HessianComplexImageType;
 
 
-	typename ImageType::Pointer GetOriginalImage(int frame);
+	ImageType::Pointer GetOriginalImage(int frame);
 
-	void SetObservedImage(int frame,int level,const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetObservedImage(int frame,int level);
-
-
-	typename ImageType::Pointer GetTemplatePSF();
+	void SetObservedImage(int frame,int level,const  ImageType::Pointer & original);
+	 ImageType::Pointer GetObservedImage(int frame,int level);
 
 
-	void SetPSF(int frame,int level,const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetPSF(int frame,int level);
+	ImageType::Pointer GetTemplatePSF();
 
 
-	void SetEstimatedImage(int frame,int level, const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetEstimatedImage(int frame,int level);
-
-	void SetEstimatedFrequencyImage( int frame,int level,const typename ComplexImageType::Pointer & original);
-	typename ComplexImageType::Pointer GetEstimatedFrequencyImage(int frame,int level);
-
-	void SetTransferImage(int frame,int level,const typename ComplexImageType::Pointer & transfer);
-	typename ComplexImageType::Pointer GetTransferImage(int frame,int level );
+	void SetPSF(int frame,int level,const  ImageType::Pointer & original);
+	 ImageType::Pointer GetPSF(int frame,int level);
 
 
-	void SetPoissonShrinkedImage(int frame,int level,const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetPoissonShrinkedImage(int frame,int level);
+	void SetEstimatedImage(int frame,int level, const  ImageType::Pointer & original);
+	 ImageType::Pointer GetEstimatedImage(int frame,int level);
 
-	void SetWarpedPoissonShrinkedImage(int frame0,int frame1,int level,const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetWarpedPoissonShrinkedImage(int frame0, int frame1,int level);
+	void SetEstimatedFrequencyImage( int frame,int level,const  ComplexImageType::Pointer & original);
+	 ComplexImageType::Pointer GetEstimatedFrequencyImage(int frame,int level);
 
-	void SetConjugatedPoisson(int frame,int level,const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetConjugatedPoisson(int frame,int level);
-
-	void SetConjugatedWarpedPoisson(int frame0,int frame1,int level,const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetConjugatedWarpedPoisson(int frame0,int frame1,int level);
+	void SetTransferImage(int frame,int level,const  ComplexImageType::Pointer & transfer);
+	 ComplexImageType::Pointer GetTransferImage(int frame,int level );
 
 
-	void SetMovingShrinked(int frame0,int frame1,int level,const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetMovingShrinked(int frame0,int frame1,int level);
+	void SetPoissonShrinkedImage(int frame,int level,const  ImageType::Pointer & original);
+	 ImageType::Pointer GetPoissonShrinkedImage(int frame,int level);
 
-	void SetMovingConjugated(int frame0,int frame1,int level,const typename ImageType::Pointer & original);
-	typename ImageType::Pointer GetMovingConjugated(int frame0,int frame1,int level);
+	void SetWarpedPoissonShrinkedImage(int frame0,int frame1,int level,const  ImageType::Pointer & original);
+	 ImageType::Pointer GetWarpedPoissonShrinkedImage(int frame0, int frame1,int level);
 
+	void SetConjugatedPoisson(int frame,int level,const  ImageType::Pointer & original);
+	 ImageType::Pointer GetConjugatedPoisson(int frame,int level);
 
-	void SetHessian(int frame, int level,const typename HessianImageType::Pointer & hessian);
-	typename HessianImageType::Pointer GetHessian(int frame,int level);
-
-	void SetShrinkedHessian(int frame,int level,const typename HessianImageType::Pointer & hessianImage);
-	typename HessianImageType::Pointer GetShrinkedHessian( int frame,int level);
-
-	void SetConjugatedHessian(int frame,int level,const typename ComplexImageType::Pointer & conjugated);
-	typename ComplexImageType::Pointer GetConjugatedHessian(int frame,int level);
-
-	void SetShrinkedBounded(int frame,int level,const typename ImageType::Pointer & bounded);
-	typename ImageType::Pointer GetShrinkedBounded(int frame,int level);
-
-	void SetConjugatedBounded(int frame,int level,const typename ImageType::Pointer & conjugated);
-	typename ImageType::Pointer GetConjugatedBounded(int frame,int level);
-
-	void SetMotionField(int frame0, int frame1,int level,const typename FieldImageType::Pointer & motionField);
-	typename FieldImageType::Pointer GetMotionField(int frame0,int frame1,int level);
+	void SetConjugatedWarpedPoisson(int frame0,int frame1,int level,const  ImageType::Pointer & original);
+	 ImageType::Pointer GetConjugatedWarpedPoisson(int frame0,int frame1,int level);
 
 
-	void SetPoissonLagrange(int frame,int level,const typename ImageType::Pointer & lagrange );
-	typename ImageType::Pointer GetPoissonLagrange(int frame,int level);
+	void SetMovingShrinked(int frame0,int frame1,int level,const  ImageType::Pointer & original);
+	 ImageType::Pointer GetMovingShrinked(int frame0,int frame1,int level);
 
-	void SetWarpedPoissonLagrange(int frame0,int frame1,int level,const typename ImageType::Pointer & lagrange );
-	typename ImageType::Pointer GetWarpedPoissonLagrange(int frame0,int frame1,int level);
+	void SetMovingConjugated(int frame0,int frame1,int level,const  ImageType::Pointer & original);
+	 ImageType::Pointer GetMovingConjugated(int frame0,int frame1,int level);
 
-	void SetHessianLagrange(int frame,int level, const typename HessianImageType::Pointer & hessian);
-	typename HessianImageType::Pointer GetHessianLagrange(int frame,int level);
 
-	void SetBoundsLagrange(int frame,int level,const typename ImageType::Pointer & bounds);
-	typename ImageType::Pointer GetBoundsLagrange(int frame,int level);
+	void SetHessian(int frame, int level,const  HessianImageType::Pointer & hessian);
+	 HessianImageType::Pointer GetHessian(int frame,int level);
 
-	void SetMovingLagrange(int frame0,int frame1,int level,const typename ImageType::Pointer & movingLagrange);
-	typename ImageType::Pointer GetMovingLagrange(int frame0,int frame1,int level);
+	void SetShrinkedHessian(int frame,int level,const  HessianImageType::Pointer & hessianImage);
+	 HessianImageType::Pointer GetShrinkedHessian( int frame,int level);
+
+	void SetConjugatedHessian(int frame,int level,const  ComplexImageType::Pointer & conjugated);
+	 ComplexImageType::Pointer GetConjugatedHessian(int frame,int level);
+
+	void SetShrinkedBounded(int frame,int level,const  ImageType::Pointer & bounded);
+	 ImageType::Pointer GetShrinkedBounded(int frame,int level);
+
+	void SetConjugatedBounded(int frame,int level,const ImageType::Pointer & conjugated);
+	 ImageType::Pointer GetConjugatedBounded(int frame,int level);
+
+	void SetMotionField(int frame0, int frame1,int level,const  FieldImageType::Pointer & motionField);
+	 FieldImageType::Pointer GetMotionField(int frame0,int frame1,int level);
+
+
+	void SetPoissonLagrange(int frame,int level,const  ImageType::Pointer & lagrange );
+	 ImageType::Pointer GetPoissonLagrange(int frame,int level);
+
+	void SetWarpedPoissonLagrange(int frame0,int frame1,int level,const  ImageType::Pointer & lagrange );
+	 ImageType::Pointer GetWarpedPoissonLagrange(int frame0,int frame1,int level);
+
+	void SetHessianLagrange(int frame,int level, const  HessianImageType::Pointer & hessian);
+	 HessianImageType::Pointer GetHessianLagrange(int frame,int level);
+
+	void SetBoundsLagrange(int frame,int level,const  ImageType::Pointer & bounds);
+	 ImageType::Pointer GetBoundsLagrange(int frame,int level);
+
+	void SetMovingLagrange(int frame0,int frame1,int level,const  ImageType::Pointer & movingLagrange);
+	 ImageType::Pointer GetMovingLagrange(int frame0,int frame1,int level);
 
 	void NewProject(int firstFrame, int lastFrame,const std::string & path,const std::string & originalName);
 
