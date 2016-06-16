@@ -14,3 +14,7 @@ include_directories(./include/)
 add_executable(sirr src/sirr.cpp src/TrackingAndDeconvolutionProject.cpp)
 
 target_link_libraries(sirr ${ITK_LIBRARIES})
+
+add_executable(splitinput src/splitinput.cpp src/TrackingAndDeconvolutionProject.cpp)
+
+target_link_libraries(splitinput ${ITK_LIBRARIES})

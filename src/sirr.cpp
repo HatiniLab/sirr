@@ -1788,7 +1788,7 @@ public:
 
 				AdjustImage<ComplexImageType>(resultFrequency, m_Offset, resultFrequency);
 				AdjustImage<ComplexImageType>(transfer, m_Offset, transfer);
-				
+
 				auto origin = resultFrequency->GetOrigin();
 				origin.Fill(0);
 
@@ -1817,7 +1817,7 @@ public:
 				tmp->SetOrigin(origin);
 				poissonLagrange->SetOrigin(origin);
 				tmp->SetSpacing(result->GetSpacing());
-				
+
 				poissonLagrange->SetSpacing(result->GetSpacing());
 
 				typedef itk::AddImageFilter<InputImageType, InputImageType, InputImageType> AddType;
