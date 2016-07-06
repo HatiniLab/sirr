@@ -2,7 +2,7 @@
 #include <itkImageFileWriter.h>
 #include <itkImageFileReader.h>
 #include <itkSCIFIOImageIO.h>
-
+#include <itkMetaImageIO.h>
  TrackingAndDeconvolutionProject::ImageType::Pointer TrackingAndDeconvolutionProject::GetOriginalImage(int frame){
 	ImageType::Pointer result{};
 
@@ -478,7 +478,7 @@ template<class T> void TrackingAndDeconvolutionProject::WriteFrame(const typenam
 
     typename WriterType::Pointer writer = WriterType::New();
 
-    std::cout << buffer.str() << std::endl;
+	std::cout << buffer.str() << std::endl;
     writer->SetFileName(buffer.str());
     writer->SetInput(image);
     writer->Update();

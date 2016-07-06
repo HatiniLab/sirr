@@ -15,35 +15,44 @@
 #include <iomanip>
 #include "itkVectorIndexSelectionCastImageFilter.h"
 int main(int argc,char ** argv){
+
+	if (argc < 4){
+		std::cerr << "Usage: " << argv[0] << " <inputFileName> <channel> <outputprefix>" << std::endl;
+		exit(-1);
+	}
+
 	std::string inputFile(argv[1]);
-	std::string outputPrefix(argv[2]);
+	unsigned int channel = atoi(argv[2]);
+	std::string outputPrefix(argv[3]);
 
 	typedef itk::SCIFIOImageIO InputImageIOType;
 
-	typedef itk::Image<double,4> InputImageType;
+	typedef itk::Image<double,5> InputImageType;
 	typedef itk::Image<double,3> OutputImageType;
 
 	typedef itk::ImageFileReader<InputImageType> InputImageReaderType;
 
-	typename InputImageReaderType::Pointer inputReader = InputImageReaderType::New();
+	 InputImageReaderType::Pointer inputReader = InputImageReaderType::New();
 
-	typename InputImageIOType::Pointer inputImageIO = InputImageIOType::New();
+	InputImageIOType::Pointer inputImageIO = InputImageIOType::New();
 
 	inputReader->SetImageIO(inputImageIO);
 	inputReader->SetFileName(inputFile);
 	inputReader->UpdateOutputInformation();
 
-	typename InputImageType::Pointer input=inputReader->GetOutput();
+	 InputImageType::Pointer input=inputReader->GetOutput();
 
 	unsigned int numFrames = input->GetLargestPossibleRegion().GetSize(3);
 
 	typedef itk::ExtractImageFilter<InputImageType,OutputImageType> ExtractImageFilterType;
-	typename ExtractImageFilterType::Pointer extractor= ExtractImageFilterType::New();
+	 ExtractImageFilterType::Pointer extractor= ExtractImageFilterType::New();
 	extractor->SetInput(inputReader->GetOutput());
 
 	InputImageType::IndexType extractionIndex=inputReader->GetOutput()->GetLargestPossibleRegion().GetIndex();
 	InputImageType::SizeType extractionSize=inputReader->GetOutput()->GetLargestPossibleRegion().GetSize();
 	extractionSize[3]=0;
+	extractionIndex[4] = channel;
+	extractionSize[4] = 0;
 
 	typedef itk::ImageFileWriter<OutputImageType> WriterType;
 	WriterType::Pointer writer = WriterType::New();
@@ -53,7 +62,7 @@ int main(int argc,char ** argv){
 
 	for(int t=0;t<numFrames;t++){
 		extractionIndex[3]=t;
-		typename InputImageType::RegionType extractionRegion(extractionIndex,extractionSize);
+		InputImageType::RegionType extractionRegion(extractionIndex,extractionSize);
 		extractor->SetExtractionRegion(extractionRegion);
 
 		extractor->SetDirectionCollapseToIdentity();
