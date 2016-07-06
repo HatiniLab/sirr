@@ -31,9 +31,10 @@ int main(int argc,char ** argv){
 
 	ReaderType::Pointer reader = ReaderType::New();
 	reader->SetFileNames(nameGenerator->GetFileNames());
-
+	reader->UpdateOutputInformation();
 	WriterType::Pointer writer = WriterType::New();
 	writer->SetInput(reader->GetOutput());
 	writer->SetFileName(argv[4]);
+	writer->SetNumberOfStreamDivisions(reader->GetOutput()->GetLargestPossibleRegion().GetSize(3));
 	writer->Update();
 }
