@@ -35,6 +35,6 @@ int main(int argc,char ** argv){
 	WriterType::Pointer writer = WriterType::New();
 	writer->SetInput(reader->GetOutput());
 	writer->SetFileName(argv[4]);
-	writer->SetNumberOfStreamDivisions(reader->GetOutput()->GetLargestPossibleRegion().GetSize(3));
+	//writer->SetNumberOfStreamDivisions(reader->GetOutput()->GetLargestPossibleRegion().GetSize(3));
 	writer->Update();
 }
