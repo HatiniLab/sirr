@@ -480,6 +480,7 @@ template<class T> void TrackingAndDeconvolutionProject::WriteFrame(const typenam
 
 	std::cout << buffer.str() << std::endl;
     writer->SetFileName(buffer.str());
+    //writer->SetUseCompression(true);
     writer->SetInput(image);
     writer->Update();
 }

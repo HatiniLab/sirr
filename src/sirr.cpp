@@ -140,6 +140,9 @@ template<class TImage, class TComplexImage> void BlindRL(const typename TComplex
 	typedef itk::HalfHermitianToRealInverseFFTImageFilter<TComplexImage, TImage> IFFTFilterType;
 	typename IFFTFilterType::Pointer iFFTFilter1 = IFFTFilterType::New();
 	iFFTFilter1->SetInput(complexMultiplyFilter1->GetOutput());
+	iFFTFilter1->SetActualXDimensionIsOdd(paddedOriginal->GetLargestPossibleRegion().GetSize(0)%2==1);
+	iFFTFilter1->UpdateOutputInformation();
+	std::cout << iFFTFilter1->GetOutput()->GetLargestPossibleRegion() << std::endl;
 
 	typedef itk::DivideImageFilter<TImage, TImage, TImage> DivideFilterType;
 	typename DivideFilterType::Pointer divideFilter = DivideFilterType::New();
@@ -166,9 +169,11 @@ template<class TImage, class TComplexImage> void BlindRL(const typename TComplex
 	typename IFFTFilterType::Pointer iFFTFilter2 = IFFTFilterType::New();
 
 	iFFTFilter2->SetInput(complexMultiplyFilter2->GetOutput());
+	iFFTFilter2->SetActualXDimensionIsOdd(paddedOriginal->GetLargestPossibleRegion().GetSize(0)%2==1);
 
 	typename IFFTFilterType::Pointer iFFTFilter3 = IFFTFilterType::New();
 
+	iFFTFilter3->SetActualXDimensionIsOdd(paddedOriginal->GetLargestPossibleRegion().GetSize(0)%2==1);
 	iFFTFilter3->SetInput(currentTransferEstimate);
 #if 0
 	typedef itk::MultiplyImageFilter<TImage, TImage, TImage> MultiplyType;
